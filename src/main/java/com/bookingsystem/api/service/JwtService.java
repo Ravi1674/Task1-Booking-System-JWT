@@ -79,7 +79,7 @@ public class JwtService implements UserDetailsService {
 		}
 	}
 
-//	Method for checking Role of the user and based on that api will give access...
+//	Method for Providing the Role to the user and based on that api will give access...
 	private Set<SimpleGrantedAuthority> getAuthorities(User user) {
 		Set<SimpleGrantedAuthority> authorities = new HashSet<SimpleGrantedAuthority>();
 
