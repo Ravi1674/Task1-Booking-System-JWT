@@ -23,18 +23,19 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+//	Register New user
 	public User registerNewUser(User user) {
 		Role role = roleDao.findById("User").get();
 
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);
 		user.setRole(roles);
-//		user.setUserPassword(user.getUserPassword());
 		user.setUserPassword(getEncodedPassword(user.getUserPassword()));
 
 		return userDao.save(user);
 	}
 
+//	Initially set the Roles (Admin and User) in the database and set admin credential hard coded.
 	public void initRolesAndUser() {
 		Role adminRole = new Role();
 		adminRole.setRoleName("Admin");
@@ -49,7 +50,6 @@ public class UserService {
 		User adminUser = new User();
 		adminUser.setUserName("admin");
 		adminUser.setUserEmail("admin@admin.com");
-//		adminUser.setUserPassword("admin123");
 		adminUser.setUserPassword(getEncodedPassword("admin123"));	
 		Set<Role> adminRoles = new HashSet<>();
 		adminRoles.add(adminRole);
@@ -66,6 +66,7 @@ public class UserService {
 //		userDao.save(user);
 	}
 
+//	Encode the password using SHA-1 algorithm
 	public String getEncodedPassword(String password) {
 		return passwordEncoder.encode(password);
 	}

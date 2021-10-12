@@ -14,10 +14,12 @@ public class BookingService {
 	@Autowired
 	public BookingDao bookingDao;
 
+//	add the booking details..
 	public Booking addCustomerBookingDetails(Booking booking) {
 		return bookingDao.save(booking);
 	}
 
+//	view all the bookings done...
 	public List<Booking> viewBookings() {
 		return bookingDao.findAll();
 	}

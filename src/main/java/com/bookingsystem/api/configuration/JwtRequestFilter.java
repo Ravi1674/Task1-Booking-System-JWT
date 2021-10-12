@@ -32,14 +32,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-
+		
+//		Get the Bearer token from Authorization....
 		final String header = request.getHeader("Authorization");
 
 		String jwtToken = null;
 		String userName = null;
 		if (header != null && header.startsWith("Bearer ")) {
-			
+//			Store the token to the jwtToken
 			jwtToken = header.substring(7);
+			
+//			Fetch the username from jwt token and if token is expired it will generate exception
 			try {
 				userName = jwtUtil.getUserNameFromToken(jwtToken);
 				System.out.println("Token user name :"+userName);

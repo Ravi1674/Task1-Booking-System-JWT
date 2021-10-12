@@ -32,6 +32,7 @@ public class JwtService implements UserDetailsService {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
+//	creating jwt token
 	public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
 		String userName = jwtRequest.getUserName();
 		String userEmail = jwtRequest.getUserEmail();
@@ -58,6 +59,9 @@ public class JwtService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String userCredential) throws UsernameNotFoundException {
 		User user;
+		
+//		Fire the query according to whether useremail is entered or username...
+		
 		if(userCredential.contains("@")) {
 			user = userDao.findByUserEmail(userCredential);
 		}
@@ -75,6 +79,7 @@ public class JwtService implements UserDetailsService {
 		}
 	}
 
+//	Method for checking Role of the user and based on that api will give access...
 	private Set<SimpleGrantedAuthority> getAuthorities(User user) {
 		Set<SimpleGrantedAuthority> authorities = new HashSet<SimpleGrantedAuthority>();
 
@@ -84,6 +89,8 @@ public class JwtService implements UserDetailsService {
 
 		return authorities;
 	}
+	
+//	Authentication checks(credentials) entered by user and handled exception..
 
 	private void authenticate(String userCredential, String userPw) throws Exception {
 		try {

@@ -12,6 +12,7 @@ public class RoleService {
 	@Autowired
 	private RoleDao roleDao;
 	
+//	create the new Role
 	public Role createNewRole(Role role) {
 		return roleDao.save(role);
 	}

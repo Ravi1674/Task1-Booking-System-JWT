@@ -33,6 +33,7 @@ public class JwtUtil {
 		return Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();
 	}
 
+//	validate the token by checking username from the token and from the database as well as it checks token is expired or not.
 	public boolean validateToken(String token, UserDetails userDetails) {
 		String userName = getUserNameFromToken(token);
 		return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
@@ -51,6 +52,7 @@ public class JwtUtil {
 		return getClaimFromToken(token, Claims::getExpiration);
 	}
 	
+//	Generate the token and set the expire time of the token..
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 

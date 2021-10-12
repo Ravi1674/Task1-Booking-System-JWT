@@ -17,7 +17,8 @@ public class UserController {
 
 	@Autowired
 	public UserService userService;
-
+	
+//	Set the Roles in the database and Admin Roles
 	@PostConstruct
 	public void initRolesAndUsers() {
 		userService.initRolesAndUser();
@@ -25,21 +26,20 @@ public class UserController {
 
 	@PostMapping({ "/registerUser" })
 	public User registerNewUser(@RequestBody User user) {
-//		System.out.println("In controller");
 		return userService.registerNewUser(user);
 	}
 
-	@GetMapping({ "/forAdmin" })
-	@PreAuthorize("hasRole('Admin')")
-	public String forAdmin() {
-		return "Admin only has access to this URL";
-	}
-
-	@GetMapping({ "/forUser" })
-	@PreAuthorize("hasRole('User')")
-	public String forUser() {
-		return "User only has access to this URL";
-	}
+	/* For Testing purpose of access the URL based on Role...
+	 * @GetMapping({ "/forAdmin" })
+	 * 
+	 * @PreAuthorize("hasRole('Admin')") public String forAdmin() { return
+	 * "Admin only has access to this URL"; }
+	 * 
+	 * @GetMapping({ "/forUser" })
+	 * 
+	 * @PreAuthorize("hasRole('User')") public String forUser() { return
+	 * "User only has access to this URL"; }
+	 */
 	
 	
 	
